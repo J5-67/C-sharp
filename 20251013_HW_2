@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251013_HW2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("가위 바위 보를 선택하세요");
+
+            string pRCP = Console.ReadLine();
+
+            Random rnd = new Random();
+
+            int rNum = rnd.Next(3);
+
+            string cRCP = "";
+
+            if (rNum == 0)
+            {
+                cRCP = "바위";
+            }
+            if (rNum == 1)
+            {
+                cRCP = "가위";
+            }
+            if (rNum == 2)
+            {
+                cRCP = "보";
+            }
+
+            if (cRCP == pRCP)
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 비겼습니다.");
+            }
+
+            else if (cRCP == "바위" && pRCP == "가위")
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 졌습니다...");
+            }
+
+            else if (cRCP == "바위" && pRCP == "보")
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 이겼습니다!");
+            }
+
+            else if (cRCP == "가위" && pRCP == "바위")
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 이겼습니다!");
+            }
+
+            else if (cRCP == "가위" && pRCP == "보")
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 졌습니다...");
+            }
+
+            else if (cRCP == "보" && pRCP == "가위")
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 이겼습니다!");
+            }
+
+            else if (cRCP == "보" && pRCP == "바위")
+            {
+                Console.WriteLine($"컴퓨터 : {cRCP} 플레이어 : {pRCP} 졌습니다...");
+            }
+
+            else
+            {
+                Console.WriteLine("입력 오류");
+            }
+
+        }
+    }
+}
