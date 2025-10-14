@@ -1,0 +1,135 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251014_HW
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            //배열, 랜덤 만들기
+            int[] numberArr = new int[9];
+            Random rnd = new Random();
+            
+            int life = 10;
+
+            //1 ~ 9 배열에 넣기
+            for (int i = 0; i < numberArr.Length; i++)
+            {
+                numberArr[i] = i+1;
+            }
+            
+            //숫자 셔플
+            for (int i = 0; i < 100; i++)
+            {
+                int dest = rnd.Next() % numberArr.Length;
+                int sour = rnd.Next() % numberArr.Length;
+                int temp = numberArr[dest];
+                numberArr[dest] = numberArr[sour];
+                numberArr[sour] = temp;
+            }
+
+                Console.Write("정답 : ");
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write("[{0}]",numberArr[i]);
+            }
+                Console.WriteLine("");
+                Console.WriteLine("");
+
+            while (life > 0)
+            {
+                //스트라이크, 볼 변수 생성, 초기화
+                int strike = 0;
+                int ball = 0;
+
+                //입력받은 숫자 배열화
+                Console.WriteLine("중복되지 않은 숫자 4자리를 입력하세요");
+                Console.Write("입력한 숫자 : ");
+                string pInput = Console.ReadLine();
+                char[] pNumArray_c = pInput.ToArray();
+
+                //오류 처리
+                if (pNumArray_c.Length < 4 || pNumArray_c.Length > 4)
+                {
+                    Console.WriteLine("올바른 숫자를 입력하세요");
+                    break;
+                }
+
+                int[] pNumArray_i = new int[4];
+
+                //string -> char_array -> int_array
+                for (int i = 0; i < pNumArray_i.Length; i++)
+                {
+                    pNumArray_i[i] = int.Parse(pNumArray_c[i].ToString());
+                }
+
+                //입력받은 숫자 배열화 출력
+                //for (int i = 0; i < pNumArray_i.Length; i++)
+                //{
+                //   Console.Write(pNumArray_i[i] + ",");
+                //}
+                //Console.WriteLine("");
+
+                //스트라이크
+                for (int i = 0; i < pNumArray_i.Length; i++)
+                {
+                    if (pNumArray_i[i] == numberArr[i])
+                    {
+                        strike++;
+                    }
+                }
+
+                //볼
+                for (int i = 0; i < pNumArray_i.Length; i++)
+                {
+                    for (int c = 0; c < pNumArray_i.Length; c++)
+                    {
+                        if (numberArr[i] == pNumArray_i[c])
+                        {
+                            ball++;
+                            break;
+                        }
+                    }
+                }
+
+                //스트라이크, 볼 출력
+                Console.WriteLine(strike + "S | " + (ball - strike) + "B");
+                Console.WriteLine("");
+
+                //스트라이크 4는 정답
+                if(strike == 4)
+                {
+                    Console.Write("축하합니다! 정답 : ");
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Console.Write("[{0}]", numberArr[i]);
+                    }
+                    Console.WriteLine("");
+                    break;
+                }
+
+                //life 소모
+                life--;
+
+                //life = 0은 실패
+                if (life == 0)
+                {
+                    Console.Write("실패하셨습니다... 정답 : ");
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Console.Write("[{0}]", numberArr[i]);
+                    }
+                    Console.WriteLine("");
+                    break;
+                }
+
+                
+            }
+        }
+    }
+}
