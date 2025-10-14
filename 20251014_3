@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251014_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /*
+             * 자료구조 : 복수의 데이터(값)을 담기 위해 정해진 구조로 데이터들을 나열하는 데이터의 집합
+             * 배열 : 동일한 특성 혹은 형태를 가지며 일정한 규칙에 따라 n개의 요소가 나열된 데이터 집합
+             * 배열은 번호와 번호에 대응하는 데이터들로 이루어진 자료구조 단점은 정적인 자료구조이기 때문에 크기를 정해줘야 한다
+             * 
+             * 데이터형식(자료형)[] 이름 = new 데이터형식(자료형)[용량(int)]
+             */
+            /*
+            int[] numarr = new int[5];
+
+            numarr[0] = 5;
+            numarr[1] = 5;
+            numarr[2] = 5;
+            numarr[3] = 5;
+            numarr[4] = 5;
+            //numarr[5] = 5;
+
+            int[] ReadArr = new int[5];
+
+            for(int  i = 0; i < ReadArr.Length; i++)
+            {
+                Console.Write("[{0}] 인덱스의 수를 입력하세요 : ", i);
+                ReadArr[i] = int.Parse(Console.ReadLine());
+            }
+
+            for (int i = 0; i < ReadArr.Length; i++)
+            {
+                Console.Write(ReadArr[i]+", ");
+            }
+            */
+
+            //셔플 알고리즘
+            int[] numberArr = new int[10];
+
+            for(int i = 0; i < numberArr.Length; i++)
+            {
+                numberArr[i] = i;
+            }// 데이터 집어넣기
+
+            //셔플 전
+            Console.WriteLine("셔플 전");
+            for(int i = 0; i < numberArr.Length; i++)
+            {
+                Console.Write("| [{0}] |", numberArr[i]);
+            }
+
+            //셔플 후
+            Console.WriteLine("셔플 후");
+            Random rnd = new Random();
+            for(int i = 0; i < 1996; i++)
+            {
+                int dest = rnd.Next() % numberArr.Length;
+                int sour = rnd.Next() % numberArr.Length;
+                int temp = numberArr[dest];
+                numberArr[dest] = numberArr[sour];
+                numberArr[sour] = temp;
+            }
+
+            for (int i = 0; i < numberArr.Length; i++)
+            {
+                Console.Write("| [{0}] |", numberArr[i]);
+            }
+        }
+    }
+}
