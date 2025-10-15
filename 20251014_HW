@@ -15,7 +15,10 @@ namespace _20251014_HW
             int[] numberArr = new int[9];
             Random rnd = new Random();
             
+            //기회 10번, 스트라이크, 볼 생성
             int life = 10;
+            int strike = 0;
+            int ball = 0;
 
             //1 ~ 9 배열에 넣기
             for (int i = 0; i < numberArr.Length; i++)
@@ -32,7 +35,8 @@ namespace _20251014_HW
                 numberArr[dest] = numberArr[sour];
                 numberArr[sour] = temp;
             }
-
+            
+            //정답 출력 (테스트)
                 Console.Write("정답 : ");
             for (int i = 0; i < 4; i++)
             {
@@ -41,11 +45,12 @@ namespace _20251014_HW
                 Console.WriteLine("");
                 Console.WriteLine("");
 
+            //기회 0 전까지 반복
             while (life > 0)
             {
-                //스트라이크, 볼 변수 생성, 초기화
-                int strike = 0;
-                int ball = 0;
+                //스트라이크, 볼 초기화
+                strike = 0;
+                ball = 0;
 
                 //입력받은 숫자 배열화
                 Console.WriteLine("중복되지 않은 숫자 4자리를 입력하세요");
@@ -53,9 +58,10 @@ namespace _20251014_HW
                 string pInput = Console.ReadLine();
                 char[] pNumArray_c = pInput.ToArray();
 
-                //오류 처리
+                //오류 처리 (입력받은 값 4자리 미만, 초과)
                 if (pNumArray_c.Length < 4 || pNumArray_c.Length > 4)
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("올바른 숫자를 입력하세요");
                     break;
                 }
@@ -98,10 +104,18 @@ namespace _20251014_HW
                 }
 
                 //스트라이크, 볼 출력
-                Console.WriteLine(strike + "S | " + (ball - strike) + "B");
-                Console.WriteLine("");
+                if (strike == 0 && ball == 0)
+                {
+                    Console.WriteLine("OUT!");
+                    Console.WriteLine("");
+                }
+                else
+                {
+                    Console.WriteLine(strike + "S | " + (ball - strike) + "B");
+                    Console.WriteLine("");
+                }
 
-                //스트라이크 4는 정답
+                //스트라이크 4는 정답 -> 종료
                 if(strike == 4)
                 {
                     Console.Write("축하합니다! 정답 : ");
@@ -116,7 +130,7 @@ namespace _20251014_HW
                 //life 소모
                 life--;
 
-                //life = 0은 실패
+                //life = 0은 실패 -> 종료
                 if (life == 0)
                 {
                     Console.Write("실패하셨습니다... 정답 : ");
