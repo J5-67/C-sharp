@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251015_HW_2
+{
+    class Program
+    {
+        public static int critical(int Pow)
+        {
+            Random rnd = new Random();
+
+            int cri_pow = 0;
+
+            int cri_try = rnd.Next() % 10;
+
+            if (cri_try > 7)
+            {
+                Console.WriteLine("크리티컬!");
+                cri_pow = Pow * 2;
+            }
+
+            return cri_pow;
+        }
+        public static int pAttack(int pHp, int mHp, int kill)
+        {
+            Console.WriteLine("플레이어의 공격!");
+
+            Random rnd = new Random();
+
+            int pPow = rnd.Next() % 100 + 25;
+
+            critical(pPow);
+
+            int DmHp = mHp - pPow;
+
+            Console.WriteLine("{0}의 피해를 입혔다!", pPow);
+            Console.WriteLine("플레이어 HP : {0} | 몬스터 Hp : {1} | {2}Kill", pHp, DmHp, kill);
+            Console.ReadLine();
+
+            return DmHp;
+
+        }
+        public static int mAttack(int pHp, int mHp, int kill)
+        {
+            Console.WriteLine("몬스터의 공격!");
+
+            Random rnd = new Random();
+
+            int mPow = rnd.Next() % 25;
+
+            int DpHp = pHp - mPow;
+
+            Console.WriteLine("{0}의 피해를 받았다!", mPow);
+            Console.WriteLine("플레이어 HP : {0} | 몬스터 Hp : {1} | {2}Kill", DpHp, mHp, kill);
+            Console.ReadLine();
+
+            return DpHp;
+        }
+
+        static void Main(string[] args)
+        {
+            int pHp = 100;
+            int mHp = 100;
+            int killcount = 0;
+
+            while (pHp > 0)
+            {
+                mHp = pAttack(pHp, mHp, killcount);
+                if(mHp <= 0)
+                {
+                    mHp = 100;
+                    killcount++;
+                }
+                pHp = mAttack(pHp, mHp, killcount);
+                if(pHp <= 0)
+                {
+                    Console.WriteLine("YOU DIED...");
+                    break;
+                }
+            }
+
+        }
+    }
+}
