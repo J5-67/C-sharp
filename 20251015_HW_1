@@ -1,0 +1,108 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251015_HW_1
+{
+    class Program
+    {
+        static string[] RndSuffleLast(string[] name_arr)
+        {
+            Random rnd = new Random();
+            //자리 랜덤 셔플
+            for (int i = 0; i < name_arr.Length; i++)
+            {
+                int dest = rnd.Next() % name_arr.Length;
+                int sort = rnd.Next() % name_arr.Length;
+
+                string temp = name_arr[dest];
+                name_arr[dest] = name_arr[sort];
+                name_arr[sort] = temp;
+            }
+
+            //빈자리 배열 끝으로 옮기기
+            for (int i = 0; i < name_arr.Length; i++)
+            {
+                if (i < name_arr.Length - 1 && name_arr[i] == "")
+                {
+                    string temp = name_arr[name_arr.Length - 1];
+                    name_arr[name_arr.Length - 1] = "";
+                    name_arr[i] = temp;
+                }
+            }
+
+            return name_arr;
+        }
+
+        static void Namein_Seat(string[,] chair_arr, string[] name_arr, int nNum)
+        {
+            for (int i = 0; i < chair_arr.GetLength(0); i++)     //4
+            {
+                for (int k = 0; k < chair_arr.GetLength(1); k++) //7
+                {
+                    chair_arr[i, k] = name_arr[nNum];
+                    nNum++;
+                }
+            }
+        }
+
+        static void Seat_Write(string[,] chair_arr)
+        {
+            Console.WriteLine("                                                                내자리");
+
+            for (int i = 0; i < chair_arr.GetLength(0); i++)
+            {
+                for (int k = 0; k < chair_arr.GetLength(1); k++)
+                {
+                    Console.Write(chair_arr[i, k]);
+
+                    if (i == 0 && k == 2)
+                    {
+                        Console.Write("\t|\t");
+                    }
+                    else if (i == 1 && k == 2)
+                    {
+                        Console.Write("\t3\t");
+                    }
+                    else if (i == 2 && k == 2)
+                    {
+                        Console.Write("\t8\t");
+                    }
+                    else if (i == 3 && k == 2)
+                    {
+                        Console.Write("\t|\t");
+                    }
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("문");
+        }
+
+        static void Main(string[] args)
+        {
+            //자리 배열
+            string[,] chair_arr = new string[4, 7];
+
+            //이름 배열
+            string[] name_arr = new string[]
+            {
+                "박희수\t", "김예은\t", "정지영\t", "송준엽\t", "안동희\t", "장재우\t", "조재건\t",
+                "지경환\t", "박원규\t", "변민섭\t", "서푸른솔", "박명훈\t", "임혜림\t", "박범근\t",
+                "신재호\t", "박민우\t", "김창근\t", "박규동\t", "변대한\t", "심호연\t", "김종환\t",
+                "김남훈\t", "최민정\t", "임우진\t", "서종오\t", "김민제\t", "정민찬\t",""
+            };
+
+            //이름 번호
+            int nNum = 0;
+
+            RndSuffleLast(name_arr);
+
+            Namein_Seat(chair_arr, name_arr, nNum);
+
+            Seat_Write(chair_arr);
+        }
+    }
+}
