@@ -1,0 +1,192 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251015_HW_1
+{
+    class Program
+    {
+        static void RndSuffle(string[] arr)
+        {
+            Random rnd = new Random();
+            //자리 랜덤 셔플
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int dest = rnd.Next() % arr.Length;
+                int sort = rnd.Next() % arr.Length;
+
+                string temp = arr[dest];
+                arr[dest] = arr[sort];
+                arr[sort] = temp;
+            }
+        }
+
+        static void Namein_Seat(string[,] chair_arr, string[] name_arr, int nNum)
+        {
+            for (int i = 0; i < chair_arr.GetLength(0); i++)     //4
+            {
+                for (int k = 0; k < chair_arr.GetLength(1); k++) //7
+                {
+                    chair_arr[i, k] = name_arr[nNum];
+                    nNum++;
+                }
+            }
+        }
+
+        static void Seat_Write(string[,] chair_arr)
+        {
+            Console.WriteLine();
+            Console.WriteLine("===========================================================내자리=====");
+            Console.WriteLine();
+
+            for (int i = 0; i < chair_arr.GetLength(0); i++)
+            {
+                for (int k = 0; k < chair_arr.GetLength(1); k++)
+                {
+                    if (chair_arr[i, k].Length == 4)
+                    {
+                        Console.Write(chair_arr[i, k]);
+                    }
+                    else
+                    {
+                        Console.Write(chair_arr[i, k] + "\t");
+                    }
+
+                    if (i == 0 && k == 2)
+                    {
+                        Console.Write("\t|\t");
+                    }
+                    else if (i == 1 && k == 2)
+                    {
+                        Console.Write("\t3\t");
+                    }
+                    else if (i == 2 && k == 2)
+                    {
+                        Console.Write("\t8\t");
+                    }
+                    else if (i == 3 && k == 2)
+                    {
+                        Console.Write("\t|\t");
+                    }
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("문====================================================================");
+            Console.WriteLine();
+        }
+
+        public static void SeatChange(string[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i < arr.Length - 1 && arr[i] == "")
+                {
+                    string temp = arr[arr.Length - 1];
+                    arr[arr.Length - 1] = "";
+                    arr[i] = temp;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i < arr.Length - 1 && arr[i] == "")
+                {
+                    string temp = arr[6];
+                    arr[i] = temp;
+                    arr[6] = "";
+                    break;
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            //자리 배열
+            string[,] chair_arr = new string[4, 7];
+
+            //이름 배열
+            string[] name_arr = new string[]
+            {
+                "박희수", "김예은", "정지영", "송준엽", "안동희", "장재우", "",
+                "지경환", "박원규", "변민섭", "서푸른솔", "박명훈", "임혜림", "박범근",
+                "신재호", "박민우", "김창근", "박규동", "변대한", "심호연", "김종환",
+                "김남훈", "최민정", "임우진", "서종오", "김민제", "정민찬", ""
+            };
+
+            //년도 배열
+            string[] year_arr = new string[]
+            {
+                "1999", "1998", "1994", "2000", "1998", "1990", "",
+                "1991", "1994", "1999", "1998", "2000", "2004", "1999",
+                "1999", "1977", "1994", "1994", "1996", "1997", "1989",
+                "1995", "1996", "1992", "2002", "1996", "2002", ""
+            };
+
+            //번호 배열
+            string[] phone_arr = new string[]
+            {
+                "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "",
+                "", "", "", "", "", "", ""
+            };
+
+            //기억 배열
+            string[] first_arr = new string[]
+            {
+                "테트리스", "쿠키런", "롤토체스", "고수", "33 원정대", "파이어 엠블렘", "",
+                "블루아카이브", "고수", "미대오빠", "셰이프 오브 드림즈", "실크송", "코드베인", "포탈",
+                "이터널리턴", "아이작", "FC온라인", "발헤임", "부반장", "고수", "용과 같이",
+                "바이오쇼크", "원신", "반장", "화이팅", "V4", "고수", ""
+            };
+
+            //변수
+            string search = "";
+            int nNum = 0;
+
+            //배열 랜덤 셔플
+            RndSuffle(name_arr);
+            RndSuffle(year_arr);
+            RndSuffle(phone_arr);
+            RndSuffle(first_arr);
+
+            //빈자리 교체
+            SeatChange(name_arr);
+            SeatChange(year_arr);
+            SeatChange(phone_arr);
+            SeatChange(first_arr);
+
+            //자리 배열에 이름 배열 넣기
+            Namein_Seat(chair_arr, name_arr, nNum);
+
+            //자리 배열 출력
+            Seat_Write(chair_arr);
+
+            Console.WriteLine("검색을 끝내려면 '끝'을 입력하세요");
+
+            while (search != "끝")
+            {
+                Console.Write("이름을 입력하세요 : ");
+                search = Console.ReadLine();
+
+                for (int i = 0; i < name_arr.Length; i++)
+
+                    if (search == name_arr[i])
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("이름 \t: " + name_arr[i]);
+                        Console.WriteLine("나이 \t: " + year_arr[i] + "년생");
+                        Console.WriteLine("전화번호: 010-" + phone_arr[i]);
+                        Console.WriteLine("기억 \t: " + first_arr[i]);
+                        Console.WriteLine();
+                    }
+            }
+        }
+    }
+}
+
