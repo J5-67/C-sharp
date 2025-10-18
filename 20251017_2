@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Classes;
+
+namespace _20251017_2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /*
+             * 깊은 복사
+             *  값이 복사되는 개념으로 대표적으로 struct가 있다
+             *  값이 통짜로 복사되어 복사가 된 순간부터 다른 값으로 보게 된다
+               
+             * 얕은 복사
+             *  참조하는 형태 -> 메모리의 주소가 복사가 되는 개념으로 대표적으로 class가 있다
+             *  주소를 복사하는 것으로 값을 변경하게 되면 본래의 데이터도 변경된다
+             */
+
+            //메소드 불러와서 실행부
+            A a = new A();
+            a.Main();
+            Console.WriteLine("Class");
+            a.student_c.viewing_student();
+            Console.WriteLine("Struct");
+            a.student_s.viewing_student();
+
+            Student_c student_C = a.student_c; //a의 클래스 형태의 student를 복사
+            Student_s student_S = a.student_s; //a의 구조체 형태의 student를 복사
+
+            student_C.name = "안동희";
+            student_S.name = "송준엽";
+
+            Console.WriteLine("Class");
+            student_C.viewing_student();
+            Console.WriteLine("Struct");
+            student_S.viewing_student();
+
+            Console.WriteLine("Class");
+            a.student_c.viewing_student();
+            Console.WriteLine("Struct");
+            a.student_s.viewing_student();
+
+        }
+    }
+}
