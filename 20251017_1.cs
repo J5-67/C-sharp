@@ -102,6 +102,7 @@ namespace _20251017_1
             Player2.Hp -= Player1.Using_SkillAtk();
             Player1.Viewing_PlayerInfo();
             Player2.Viewing_PlayerInfo();
+            
         }
     }
 }
