@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _20251017_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /*
+             * string 문자열 -> 문자 집합
+             * char   문자   -> 단일 문자
+             * 
+             * string method
+             */
+
+            #region format() -> string 형식을 정한다
+                float f = 0.1f;
+                string str_f = string.Format("{0:0.000}, {1:0.0000}", f, f);
+                //소수점 3자리까지 출력을 하려면
+                Console.WriteLine("{0:0.000}", f);
+                Console.WriteLine(str_f);
+            #endregion
+
+            #region split() -> 문자열을 나눈다 return형식 : 배열
+                string str_sp = "i dont care care care care";
+                //매개변수로 들어가는 문자는 그 문자열의 기준이 되어 나눈다
+                //매개변수로 들어간 문자는 사라진다. 즉 포함되지 않는다.
+                string[] str_sparr = str_sp.Split('c');
+                for(int i = 0; i < str_sparr.Length; i++)
+                {
+                    Console.WriteLine(str_sparr[i]);
+                }
+            #endregion
+
+            #region substring() -> 글자 빼기 -> 포함된 문자를 빼는 방식
+                string str_sub = "재우가방에들어간다";
+                Console.WriteLine(str_sub.Substring(2)); //매개변수가 1개면 시작인덱스 ~ 끝까지
+                Console.WriteLine(str_sub.Substring(2, 5));//매개변수가 2개면 시작인덱스 지정까지 자른다
+            #endregion
+
+            #region compareTo() -> 완전 똑같은지 비교. 같다면 0을 return
+                //포함되어 있을 수도 있고, 포함되지 않을 수도 있을때 +1 -1
+                //비교하는 문자가 같으면 0을 리턴
+                string str_com = "김종환심호연변대한박규동";
+                int compare1 = str_com.CompareTo("변");
+                Console.WriteLine(compare1);
+                int compare2 = str_com.CompareTo("김종환심호연변대한박규동");
+                Console.WriteLine(compare2);
+                int compare3 = str_com.CompareTo("김");
+                Console.WriteLine(compare3);
+                int compare4 = str_com.CompareTo("안");
+                Console.WriteLine(compare4);
+            #endregion
+
+            #region replace() -> 대체 -> 특정 문자를 검색해서 그 문자를 변경한다
+                string str_rep = "정지영 변대한 박희수";
+                Console.WriteLine(str_rep.Replace("변대한", "김예은"));
+            #endregion
+
+            #region length -> 길이 -> return형식 : int
+                string str_len = "나태해지지 않게 때려주세요!"; //띄어쓰기 포함
+                Console.WriteLine(str_len.Length);
+            #endregion
+
+        }
+    }
+}
