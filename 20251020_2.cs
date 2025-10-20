@@ -31,6 +31,7 @@ namespace _20251020_2
             return result;
         }
 
+        
         static void Main(string[] args)
         {
             //Program p = new Program();
