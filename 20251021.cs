@@ -23,14 +23,13 @@ namespace _20251021_1
 
         static void Main(string[] args)
         {
-            /*
             try
             {
-                int[] array = new int[5];
+                int[] aarray = new int[5];
 
                 for (int i = 0; i < 6; i++)
                 {
-                    array[i] = i;
+                    aarray[i] = i;
                 }
             }
             catch (Exception ex)
@@ -39,7 +38,6 @@ namespace _20251021_1
             }
 
             Console.WriteLine("오류인가?");
-            */
 
             //index 기반 자료구조
             /*
@@ -105,6 +103,91 @@ namespace _20251021_1
             for(int i = 0; i < arrayList.Count; i++)
             {
                 Console.WriteLine($"arrayList[{i}] => {arrayList[i]} | Type [{arrayList[i].GetType()}]");
+            }
+
+            //데이터 들어오는 순서에 따른 자료구조
+            /*
+             *              stack       queue
+             *             후입선출     선입선출
+             *            먼저->나중   먼저->먼저
+             *             컨트롤Z     은행대기표
+             *            뒤로가기     인쇄대기열
+             *           문자열리버스   
+             */
+
+            Stack<int> stack = new Stack<int>();
+
+            for(int i = 1; i<=5; i++)
+            {
+                stack.Push(i);
+            }
+
+            //stack.count는 지속적으로 크기가 변하기 때문에 위에서 저장을 해놓고 사용하는 것이 안전하다
+            int count = stack.Count;
+            for (int i = 0; i < count; i++)
+            {
+                int a = stack.Pop();
+                Console.WriteLine(a);
+            }
+
+            Queue<int> queue = new Queue<int>();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                queue.Enqueue(i);
+            }
+
+            count = queue.Count;
+            for (int i = 0; i < count; i++)
+            {
+                int a = queue.Dequeue();
+                Console.WriteLine(a);
+            }
+
+            //key - value 자료구조
+            /*
+             * Dictionary   형태가 정해져 있다          
+             * hashtable    형태가 정해져 있지 않다      
+             * [Key] - [Value]
+             */
+
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("변대한", "변태");
+            dictionary.Add("변민섭", "미대오빠");
+            dictionary.Add("장재우", "이상하게머리가빨리자람");
+            dictionary.Add("박규동", "몰라 그냥 웃어");
+            dictionary.Add("김창근", "근신재에서 근을 맡고 있음");
+            dictionary.Add("신재호", "근신재에서 신재를 맡고 있음");
+            dictionary.Add("김예은", "ㅎㅇ");
+            //dictionary.Add("김예은", "ㅂㅇ");
+
+            string key_name = Console.ReadLine();
+
+            while (true)
+            {
+                Console.Write("별명을 검색할 친구를 입력해 주세요 : ");
+                key_name = Console.ReadLine();
+
+                if (dictionary.ContainsKey(key_name))
+                {
+                    Console.WriteLine(dictionary[key_name]);
+                }
+                else
+                {
+                    Console.WriteLine("당신의 이름은 없습니다.");
+                }
+            }
+
+            Hashtable hashTable = new Hashtable();
+
+            hashTable.Add(1, "변대한");
+            hashTable.Add("변대한", 77);
+            hashTable.Add('ㄱ', 88);
+
+            
+            if (hashTable.ContainsKey(key_name))
+            {
+                Console.WriteLine(hashTable[key_name]);
             }
         }
     }
